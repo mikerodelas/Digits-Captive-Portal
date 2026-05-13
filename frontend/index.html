@@ -3,27 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RoseNet Access Portal</title>
+  <title>The Matcha Tokyo WiFi</title>
   <style>
-    /* Bitcoin DeFi Design Tokens - Local Only Edition */
     :root {
-      --void: #030304;
-      --dark-matter: #0f1115;
-      --pure-light: #ffffff;
-      --stardust: #94a3b8;
-      --dim-boundary: rgba(30, 41, 59, 0.5);
-      --bitcoin-orange: #f7931a;
-      --burnt-orange: #ea580c;
-      --digital-gold: #ffd600;
-      --orange-glow: rgba(247, 147, 26, 0.5);
-      
-      /* 
-         Typography Stack - Robust System Fallbacks 
-         No external dependencies to ensure rendering during captive portal interception.
-      */
-      --font-technical: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, 'Consolas', 'Liberation Mono', monospace;
-      --font-display: system-ui, -apple-system, 'Segoe UI Variable Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      --font-body: system-ui, -apple-system, 'Segoe UI Variable Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --matcha-primary: #5f7148;
+      --matcha-secondary: #758c5b;
+      --matcha-dark: #243018;
+      --matcha-muted: #6b7b55;
+      --matcha-light: #7d8c69;
+      --washi: #f7f8f3;
+      --washi-mid: #eef2e3;
+      --washi-dark: #e5ebd7;
+      --gold-accent: #b8965a;
+      --border-light: #d9e0ce;
+      --text-muted: #66725b;
+      --text-placeholder: #97a28b;
+      --error: #d64f4f;
+      --success: #4f8b52;
     }
 
     * {
@@ -33,301 +29,254 @@
     }
 
     body {
-      background-color: var(--void);
-      color: var(--pure-light);
-      font-family: var(--font-body);
-      line-height: 1.6;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
       min-height: 100vh;
+      background: linear-gradient(135deg, #f7f8f3 0%, #eef2e3 50%, #e5ebd7 100%);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       position: relative;
+      padding: 20px;
     }
 
-    /* Signature Grid Pattern (Pure CSS) */
-    body::before {
-      content: '';
+    .bg-pattern {
       position: absolute;
-      inset: 0;
-      background-size: 50px 50px;
-      background-image:
-        linear-gradient(to right, var(--dim-boundary) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--dim-boundary) 1px, transparent 1px);
-      mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-      pointer-events: none;
-      opacity: 0.4;
-    }
-
-    /* Ambient Glows */
-    .ambient-glow {
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      background: var(--bitcoin-orange);
-      filter: blur(120px);
-      opacity: 0.05;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(102, 126, 70, 0.08) 0%, transparent 70%);
       border-radius: 50%;
-      pointer-events: none;
+      top: -250px;
+      right: -200px;
       z-index: 0;
     }
-    .glow-1 { top: -100px; right: -100px; }
-    .glow-2 { bottom: -100px; left: -100px; }
 
-    .main-container {
+    .container {
       width: 100%;
-      max-width: 440px;
-      padding: 2rem;
-      z-index: 10;
-      text-align: center;
-    }
-
-    header {
-      margin-bottom: 3rem;
-      position: relative;
-    }
-
-    .logo-container {
-      position: relative;
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 1.5rem;
-    }
-
-    .logo-orb {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--burnt-orange), var(--bitcoin-orange));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 30px var(--orange-glow);
+      max-width: 430px;
       position: relative;
       z-index: 2;
     }
 
-    .logo-ring {
-      position: absolute;
-      inset: -10px;
-      border: 1px solid var(--bitcoin-orange);
-      border-radius: 50%;
-      opacity: 0.3;
-      animation: spin 10s linear infinite;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .logo {
-      font-family: var(--font-display);
-      font-size: 2.25rem;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      margin-bottom: 0.5rem;
-    }
-
-    .logo span {
-      background: linear-gradient(to right, var(--bitcoin-orange), var(--digital-gold));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .tagline {
-      font-family: var(--font-technical);
-      color: var(--stardust);
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.25em;
-    }
-
-    /* Technical Card */
     .card {
-      background-color: var(--dark-matter);
-      padding: 3rem 2.5rem;
-      border-radius: 2rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      position: relative;
-      /* backdrop-filter is widely supported locally */
-      backdrop-filter: blur(10px);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      border-color: rgba(247, 147, 26, 0.3);
-      box-shadow: 0 0 30px -10px rgba(247, 147, 26, 0.15);
-    }
-
-    /* Corner Borders */
-    .card::before, .card::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      pointer-events: none;
-    }
-    .card::before {
-      top: 15px; left: 15px;
-      border-top: 2px solid var(--bitcoin-orange);
-      border-left: 2px solid var(--bitcoin-orange);
-      opacity: 0.5;
-    }
-    .card::after {
-      bottom: 15px; right: 15px;
-      border-bottom: 2px solid var(--digital-gold);
-      border-right: 2px solid var(--digital-gold);
-      opacity: 0.5;
-    }
-
-    .card-title {
-      font-family: var(--font-display);
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.02em;
-    }
-
-    .card-subtitle {
-      color: var(--stardust);
-      font-size: 0.95rem;
-      margin-bottom: 2.5rem;
-    }
-
-    /* Terminal Inputs */
-    .input-wrapper {
-      position: relative;
-      margin-bottom: 1.5rem;
-    }
-
-    .input-field {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.3);
-      border: none;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-      padding: 1.25rem 1rem;
-      color: var(--pure-light);
-      font-family: var(--font-technical);
-      font-size: 1.25rem;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 30px;
+      padding: 42px 34px;
+      box-shadow:
+        0 20px 60px rgba(64, 80, 40, 0.12),
+        0 8px 20px rgba(64, 80, 40, 0.05);
       text-align: center;
-      transition: all 0.2s ease;
-      letter-spacing: 0.15em;
     }
 
-    .input-field:focus {
-      outline: none;
-      border-bottom-color: var(--bitcoin-orange);
-      background: rgba(247, 147, 26, 0.05);
-      box-shadow: 0 10px 20px -10px rgba(247, 147, 26, 0.2);
+    .logo-section {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
     }
 
-    .input-field::placeholder {
-      color: rgba(255, 255, 255, 0.2);
+    .logo-circle {
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: #5f7148;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(95, 113, 72, 0.28);
+    }
+
+    .logo-circle span {
+      color: #fff;
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .brand {
+      font-size: 11px;
+      letter-spacing: 5px;
+      font-weight: 700;
+      color: #6b7b55;
+      margin-bottom: 28px;
       text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
     }
 
-    /* Bitcoin CTA Button */
+    .title {
+      font-size: 42px;
+      line-height: 1;
+      color: #243018;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .poster-tagline {
+      margin-top: 10px;
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #7d8c69;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #66725b;
+      margin-bottom: 32px;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    .voucher-input {
+      width: 100%;
+      padding: 18px 20px;
+      border-radius: 16px;
+      border: 1px solid #d9e0ce;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 15px;
+      color: #243018;
+      outline: none;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+
+    .voucher-input::placeholder {
+      color: #97a28b;
+    }
+
+    .voucher-input:focus {
+      border-color: #6f8450;
+      box-shadow: 0 0 0 5px rgba(111, 132, 80, 0.12);
+    }
+
     .btn-submit {
       width: 100%;
-      padding: 1.1rem;
-      border-radius: 9999px;
       border: none;
-      background: linear-gradient(to right, var(--burnt-orange), var(--bitcoin-orange));
-      color: var(--pure-light);
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
+      border-radius: 16px;
+      padding: 18px;
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 20px -5px var(--burnt-orange);
-      margin-top: 1rem;
+      background: linear-gradient(135deg, #5f7148 0%, #758c5b 100%);
+      transition: all 0.25s ease;
+      box-shadow: 0 12px 24px rgba(95, 113, 72, 0.22);
+      font-family: inherit;
     }
 
     .btn-submit:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 30px -5px var(--bitcoin-orange);
-      background: linear-gradient(to right, var(--bitcoin-orange), var(--digital-gold));
+      box-shadow: 0 18px 35px rgba(95, 113, 72, 0.28);
     }
 
     .btn-submit:active {
-      transform: translateY(0) scale(0.98);
+      transform: scale(0.98);
     }
 
-    /* Messages */
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     .message {
-      margin-top: 1.5rem;
-      font-family: var(--font-technical);
-      font-size: 0.85rem;
-      min-height: 1.5em;
-    }
-    .error-message { color: #ff4b4b; text-shadow: 0 0 10px rgba(255, 75, 75, 0.3); }
-    .success-message { color: var(--digital-gold); text-shadow: 0 0 10px rgba(255, 214, 0, 0.3); }
-
-    footer {
-      position: absolute;
-      bottom: 2rem;
-      font-family: var(--font-technical);
-      color: rgba(255, 255, 255, 0.2);
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.4em;
+      margin-top: 18px;
+      font-size: 14px;
+      font-weight: 500;
+      min-height: 20px;
     }
 
-    /* Mobile Adjustments */
+    .error-message {
+      color: #d64f4f;
+    }
+
+    .success-message {
+      color: #4f8b52;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 12px;
+      color: #92a083;
+      letter-spacing: 1px;
+    }
+
     @media (max-width: 480px) {
-      .main-container { padding: 1.5rem; }
-      .card { padding: 2.5rem 1.5rem; }
-      .card-title { font-size: 1.5rem; }
-      .logo { font-size: 1.75rem; }
+      .card {
+        padding: 34px 24px;
+        border-radius: 24px;
+      }
+
+      .title {
+        font-size: 32px;
+      }
+
+      .logo-circle {
+        width: 72px;
+        height: 72px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
+  <div class="bg-pattern"></div>
 
-  <div class="main-container">
-    <header>
-      <div class="logo-container">
-        <div class="logo-ring"></div>
-        <div class="logo-orb">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+  <div class="container">
+    <div class="card">
+
+      <div class="logo-section">
+        <div class="logo-circle">
+          <span>M</span>
         </div>
       </div>
-      <h1 class="logo">Rose<span>Net</span> Access</h1>
-      <p class="tagline">Connect. Surf. Chill.</p>
-    </header>
 
-    <main class="card">
-      <h2 class="card-title">Welcome</h2>
-      <p class="card-subtitle">Enter your voucher code to connect to the internet.</p>
-      
+      <div class="brand">
+        Matcha Tokyo WiFi
+      </div>
+
+      <h1 class="title">The Matcha Tokyo</h1>
+
+      <p class="poster-tagline">
+        Premium Matcha Experience
+      </p>
+
+      <p class="subtitle">
+        Enter your voucher code to access premium high-speed internet.
+      </p>
+
       <form id="voucherForm">
-        <div class="input-wrapper">
-          <input type="text" id="voucherCode" placeholder="Your Voucher Code" class="input-field" required autocomplete="off" spellcheck="false" autofocus>
+        <div class="input-group">
+          <input
+            type="text"
+            id="voucherCode"
+            placeholder="Enter Voucher Code"
+            class="voucher-input"
+            required
+            autocomplete="off"
+            spellcheck="false"
+            autofocus
+          />
         </div>
-        <button type="submit" class="btn-submit">Connect</button>
+        <button type="submit" class="btn-submit">Connect to WiFi</button>
       </form>
-      
+
       <p id="errorMessage" class="message error-message"></p>
       <p id="successMessage" class="message success-message"></p>
-    </main>
-  </div>
 
-  <footer>
-    Secure Protocol V3.0
-  </footer>
+      <div class="footer-note">
+        Secure • Fast • Unlimited Experience
+      </div>
+
+    </div>
+  </div>
 
   <script>
     document.getElementById('voucherForm').addEventListener('submit', async function(event) {
@@ -350,7 +299,7 @@
       if (!clientIP || !clientMAC || !token) {
         errorMessage.textContent = 'Required information is missing. Please reconnect to WiFi.';
         btn.disabled = false;
-        btn.textContent = 'Connect';
+        btn.textContent = 'Connect to WiFi';
         return;
       }
       try {
@@ -367,11 +316,10 @@
       } catch (error) {
         errorMessage.textContent = `Error: ${error.message}`;
         btn.disabled = false;
-        btn.textContent = 'Connect';
+        btn.textContent = 'Connect to WiFi';
       }
     });
 
-    // Auto-check for existing sessions
     (async function() {
       const urlParams = new URLSearchParams(window.location.search);
       const clientMAC = urlParams.get('mac');
